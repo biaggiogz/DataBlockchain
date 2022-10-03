@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="BinanceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-03T22:03:34" hostname="vex" time="0.133">
+  <properties/>
+  <testcase name="givenUsingLowLevelApi_whenParsingJsonStringIntoJsonNode_thenCorrect()" classname="BinanceTest" time="0.133"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
