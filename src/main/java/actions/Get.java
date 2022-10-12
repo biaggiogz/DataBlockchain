@@ -11,10 +11,10 @@ public class Get {
 
 
 
-    public String getTickerBinance() throws IOException, InterruptedException {
+    public static String getTickerBinance() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.binance.com/api/v3/depth?symbol=LITUSDT&limit=200"))
+                .uri(URI.create("https://api.binance.com/api/v3/ticker?symbol=MIRUSDT&windowSize=1m"))
                 .header("Content-Type", "application/json; charset=UTF-8")
                 .header("X-MBX-APIKEY","KWb3olcOQB07kFykqFXWjZMvzXMT7RFw9K28AADHAvt7DYqfxIQ1cY7nApAyYXq2")
                 .GET()

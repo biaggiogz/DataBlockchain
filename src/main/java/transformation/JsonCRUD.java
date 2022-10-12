@@ -9,12 +9,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.Ticker;
 import org.json.JSONObject;
 
+import javax.swing.text.html.HTMLDocument;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 
 public class JsonCRUD {
 
-    public JSONObject transformTickerBinance(String json) throws JsonProcessingException {
+    public static JSONObject transformTickerBinance(String json) throws JsonProcessingException {
 
         JSONObject jo = new JSONObject(json);
 
@@ -35,11 +40,12 @@ public class JsonCRUD {
         return  jo;
     }
 
-    public void writeJsonTickerBinance(JSONObject jo) throws IOException {
+    public static void writeJsonTickerBinance(JSONObject jo) throws IOException {
+        Timestamp timestamp = new Timestamp(new  Date().getTime());
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node2 =mapper.readTree(jo.toString());
         JsonFactory jf = new JsonFactory();
-        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/ticker" + 1 +".js"), JsonEncoding.UTF8);
+        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/ticker" + timestamp.toString() +".js"), JsonEncoding.UTF8);
         jg.useDefaultPrettyPrinter();
         mapper.writeTree(jg, node2);
     }
