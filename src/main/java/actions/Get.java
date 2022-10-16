@@ -24,6 +24,21 @@ public class Get {
         return response.body();
     }
 
+    public static String getTickerCoinmarketCap() throws IOException, InterruptedException {
+        String coinmarketCap = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=PHA";
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(coinmarketCap))
+                .header("Content-Type", "application/json; charset=UTF-8")
+                .header("X-CMC_PRO_API_KEY","ccd927fc-c51d-4d5b-9245-5dafefb7021b")
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
+
 
 
 

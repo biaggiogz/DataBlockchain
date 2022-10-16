@@ -12,11 +12,28 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        Runnable drawRunnable = new Runnable() {
+//        Runnable drawRunnable = new Runnable() {
+//            public void run() {
+//                try {
+//                    JSONObject    jo = JsonCRUD.transformTickerBinance(Get.getTickerBinance());
+//                    JsonCRUD.writeJsonTickerBinance(jo);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        };
+//
+//        ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+//        exec.scheduleAtFixedRate(drawRunnable , 0, 1, TimeUnit.MINUTES);
+
+                Runnable drawRunnable = new Runnable() {
             public void run() {
                 try {
-                    JSONObject    jo = JsonCRUD.transformTickerBinance(Get.getTickerBinance());
-                    JsonCRUD.writeJsonTickerBinance(jo);
+                    JSONObject    jo = JsonCRUD.transformTickerCoinmarketCap(Get.getTickerCoinmarketCap());
+                    JsonCRUD.writeJsonTickerCoinmarketCap(jo);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -28,6 +45,8 @@ public class Main {
 
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
         exec.scheduleAtFixedRate(drawRunnable , 0, 1, TimeUnit.MINUTES);
+
+
 
 
 
