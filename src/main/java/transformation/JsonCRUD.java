@@ -20,9 +20,8 @@ import java.util.Date;
 public class JsonCRUD {
 
     public static JSONObject transformTickerBinance(String json) throws JsonProcessingException {
-
+        Instant now =  Instant.now();
         JSONObject jo = new JSONObject(json);
-
         jo.remove("weightedAvgPrice");
         jo.remove("openPrice");
         jo.remove("highPrice");
@@ -34,18 +33,17 @@ public class JsonCRUD {
         jo.remove("firstId");
         jo.remove("lastId");
         jo.remove("count");
-
+        jo.put("timestamp",Timestamp.from(now).getTime());
 //        ObjectMapper mapper = new ObjectMapper();
 //        Ticker ticker = mapper.readerFor(Ticker.class).readValue(jo.toString());
         return  jo;
     }
 
     public static void writeJsonTickerBinance(JSONObject jo) throws IOException {
-        Timestamp timestamp = new Timestamp(new  Date().getTime());
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node2 =mapper.readTree(jo.toString());
         JsonFactory jf = new JsonFactory();
-        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/tickerBinance" + timestamp.toString() +".js"), JsonEncoding.UTF8);
+        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/binance/tickerBinance" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
         jg.useDefaultPrettyPrinter();
         mapper.writeTree(jg, node2);
     }
@@ -78,7 +76,17 @@ public class JsonCRUD {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node2 =mapper.readTree(jo.toString());
         JsonFactory jf = new JsonFactory();
-        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/tickerCoinmarketCap" + timestamp.toString() +".js"), JsonEncoding.UTF8);
+        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/coinmarketCap/tickerCoinmarketCap" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
+        jg.useDefaultPrettyPrinter();
+        mapper.writeTree(jg, node2);
+    }
+
+    public static void writeJsonTickerBYbit(JSONObject jo) throws IOException {
+        Timestamp timestamp = new Timestamp(new  Date().getTime());
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node2 =mapper.readTree(jo.toString());
+        JsonFactory jf = new JsonFactory();
+        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/byBit/tickerbyBit" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
         jg.useDefaultPrettyPrinter();
         mapper.writeTree(jg, node2);
     }
