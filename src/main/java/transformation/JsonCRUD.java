@@ -72,13 +72,21 @@ public class JsonCRUD {
     }
 
     public static void writeJsonTickerCoinmarketCap(JSONObject jo) throws IOException {
+
+
+
+
         Timestamp timestamp = new Timestamp(new  Date().getTime());
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode node2 =mapper.readTree(jo.toString());
+//        JsonNode node2 =mapper.readTree(jo.toString());
+        JsonNode node = new ObjectMapper().readTree(jo.toString());
+        JsonNode node3 = node.get("data").get("PHA").findValue("USD");
+
+
         JsonFactory jf = new JsonFactory();
         JsonGenerator jg = jf.createGenerator(new File("src/main/resources/coinmarketCap/tickerCoinmarketCap" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
         jg.useDefaultPrettyPrinter();
-        mapper.writeTree(jg, node2);
+        mapper.writeTree(jg, node3);
     }
 
     public static void writeJsonTickerBYbit(JSONObject jo) throws IOException {

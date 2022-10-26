@@ -33,29 +33,11 @@ public class Main {
 //        ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
 //        exec.scheduleAtFixedRate(drawRunnable , 0, 1, TimeUnit.MINUTES);
 
-//                Runnable drawRunnable = new Runnable() {
-//            public void run() {
-//                try {
-//                    JSONObject    jo = JsonCRUD.transformTickerCoinmarketCap(Get.getTickerCoinmarketCap());
-//                    JsonCRUD.writeJsonTickerCoinmarketCap(jo);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        };
-//
-//        ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
-//        exec.scheduleAtFixedRate(drawRunnable , 0, 1, TimeUnit.MINUTES);
-
-
-        Runnable drawRunnable = new Runnable() {
+                Runnable drawRunnable = new Runnable() {
             public void run() {
                 try {
-                    JSONObject    jo = JsonCRUD.transformTickerCoinmarketCap(Get.getTickerBybit());
-                    JsonCRUD.writeJsonTickerBYbit(jo);
+                    JSONObject    jo = JsonCRUD.transformTickerCoinmarketCap(Get.getTickerCoinmarketCap());
+                    JsonCRUD.writeJsonTickerCoinmarketCap(jo);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -68,9 +50,7 @@ public class Main {
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
         exec.scheduleAtFixedRate(drawRunnable , 0, 1, TimeUnit.MINUTES);
 
-//        TimeZone.setDefault( TimeZone.getTimeZone("GMT"));
-//        Instant now =  Instant.now();
-//        System.out.println( Timestamp.from(now).getTime());
+
 
 
 
