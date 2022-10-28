@@ -34,12 +34,15 @@ public class JsonCRUD {
         jo.remove("lastId");
         jo.remove("count");
         jo.put("timestamp",Timestamp.from(now).getTime());
+        jo.put("volumebinance",Float.valueOf(jo.get("volume").toString()));
+        jo.remove("volume");
 //        ObjectMapper mapper = new ObjectMapper();
 //        Ticker ticker = mapper.readerFor(Ticker.class).readValue(jo.toString());
         return  jo;
     }
 
     public static void writeJsonTickerBinance(JSONObject jo) throws IOException {
+
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node2 =mapper.readTree(jo.toString());
         JsonFactory jf = new JsonFactory();
@@ -51,38 +54,30 @@ public class JsonCRUD {
     public static JSONObject transformTickerCoinmarketCap(String json) throws JsonProcessingException {
 
         JSONObject jo = new JSONObject(json);
+        Instant now =  Instant.now();
+        jo.put("timestamp",Timestamp.from(now).getTime());
 
+        return  jo;
+    }
 
+    public static JSONObject transformTickerBybit(String json) throws JsonProcessingException {
 
-//        jo.remove("weightedAvgPrice");
-//        jo.remove("openPrice");
-//        jo.remove("highPrice");
-//        jo.remove("lowPrice");
-//        jo.remove("lastPrice");
-//        jo.remove("quoteVolume");
-//        jo.remove("openTime");
-//        jo.remove("closeTime");
-//        jo.remove("firstId");
-//        jo.remove("lastId");
-//        jo.remove("count");
+        JsonNode node = new ObjectMapper().readTree(json);
+        String jsonn =  node.get("result").toString();
+        JSONObject jo = new JSONObject(jsonn);
+        jo.put("volumeBybit",Float.valueOf(jo.get("volume").toString()));
+        jo.remove("volume");
+        Instant now =  Instant.now();
+        jo.put("timestamp",Timestamp.from(now).getTime());
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        Ticker ticker = mapper.readerFor(Ticker.class).readValue(jo.toString());
         return  jo;
     }
 
     public static void writeJsonTickerCoinmarketCap(JSONObject jo) throws IOException {
 
-
-
-
-        Timestamp timestamp = new Timestamp(new  Date().getTime());
         ObjectMapper mapper = new ObjectMapper();
-//        JsonNode node2 =mapper.readTree(jo.toString());
         JsonNode node = new ObjectMapper().readTree(jo.toString());
         JsonNode node3 = node.get("data").get("PHA").findValue("USD");
-
-
         JsonFactory jf = new JsonFactory();
         JsonGenerator jg = jf.createGenerator(new File("src/main/resources/coinmarketCap/tickerCoinmarketCap" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
         jg.useDefaultPrettyPrinter();
@@ -90,7 +85,6 @@ public class JsonCRUD {
     }
 
     public static void writeJsonTickerBYbit(JSONObject jo) throws IOException {
-        Timestamp timestamp = new Timestamp(new  Date().getTime());
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node2 =mapper.readTree(jo.toString());
         JsonFactory jf = new JsonFactory();

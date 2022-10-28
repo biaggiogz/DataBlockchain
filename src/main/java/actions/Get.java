@@ -12,13 +12,15 @@ import java.util.TimeZone;
 
 public class Get {
 
-
+        static String content = "Content-Type";
+        static String charset = "application/json; charset=UTF-8";
 
     public static String getTickerBinance() throws IOException, InterruptedException {
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.binance.com/api/v3/ticker?symbol=MIRUSDT&windowSize=1m"))
-                .header("Content-Type", "application/json; charset=UTF-8")
+                .header(content, charset)
                 .header("X-MBX-APIKEY","KWb3olcOQB07kFykqFXWjZMvzXMT7RFw9K28AADHAvt7DYqfxIQ1cY7nApAyYXq2")
                 .GET()
                 .build();
@@ -33,7 +35,7 @@ public class Get {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(coinmarketCap))
-                .header("Content-Type", "application/json; charset=UTF-8")
+                .header(content, charset)
                 .header("X-CMC_PRO_API_KEY","ccd927fc-c51d-4d5b-9245-5dafefb7021b")
                 .GET()
                 .build();
@@ -57,7 +59,7 @@ public class Get {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(Bybit))
-                .header("Content-Type", "application/json; charset=UTF-8")
+                .header(content, charset)
                 .header("X-CMC_PRO_API_KEY","ccd927fc-c51d-4d5b-9245-5dafefb7021b")
                 .GET()
                 .build();
