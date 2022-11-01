@@ -36,6 +36,7 @@ public class JsonCRUD {
         jo.put("timestamp",Timestamp.from(now).getTime());
         jo.put("volumebinance",Float.valueOf(jo.get("volume").toString()));
         jo.remove("volume");
+        jo.put("time","1m");
 //        ObjectMapper mapper = new ObjectMapper();
 //        Ticker ticker = mapper.readerFor(Ticker.class).readValue(jo.toString());
         return  jo;
@@ -52,10 +53,17 @@ public class JsonCRUD {
     }
 
     public static JSONObject transformTickerCoinmarketCap(String json) throws JsonProcessingException {
-
-        JSONObject jo = new JSONObject(json);
+        JsonNode node = new ObjectMapper().readTree(json);
+        JsonNode node3 = node.get("data").get("PHA").findValue("USD");
+        JSONObject jo = new JSONObject(node3.toString());
         Instant now =  Instant.now();
-        jo.put("timestamp",Timestamp.from(now).getTime());
+
+        Long e = Timestamp.from(now).getTime();
+        String symbol =  "PHA";
+
+        jo.put("timestamp",e);
+        jo.put("symbol",symbol);
+        jo.put("time","1m");
 
         return  jo;
     }
@@ -69,6 +77,8 @@ public class JsonCRUD {
         jo.remove("volume");
         Instant now =  Instant.now();
         jo.put("timestamp",Timestamp.from(now).getTime());
+        jo.put("time","1m");
+
 
         return  jo;
     }
@@ -76,8 +86,7 @@ public class JsonCRUD {
     public static void writeJsonTickerCoinmarketCap(JSONObject jo) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode node = new ObjectMapper().readTree(jo.toString());
-        JsonNode node3 = node.get("data").get("PHA").findValue("USD");
+        JsonNode node3 =mapper.readTree(jo.toString());
         JsonFactory jf = new JsonFactory();
         JsonGenerator jg = jf.createGenerator(new File("src/main/resources/coinmarketCap/tickerCoinmarketCap" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
         jg.useDefaultPrettyPrinter();
