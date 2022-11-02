@@ -37,6 +37,8 @@ public class JsonCRUD {
         jo.put("volumebinance",Float.valueOf(jo.get("volume").toString()));
         jo.remove("volume");
         jo.put("time","1m");
+
+
 //        ObjectMapper mapper = new ObjectMapper();
 //        Ticker ticker = mapper.readerFor(Ticker.class).readValue(jo.toString());
         return  jo;
