@@ -12,6 +12,8 @@ import java.util.TimeZone;
 
 public class Get {
 
+
+        static  String symbol = "LINK";
         static String content = "Content-Type";
         static String charset = "application/json; charset=UTF-8";
 
@@ -19,7 +21,7 @@ public class Get {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.binance.com/api/v3/ticker?symbol=MIRUSDT&windowSize=1m"))
+                .uri(URI.create("https://api.binance.com/api/v3/ticker?symbol="+symbol+ "USDT&windowSize=1m"))
                 .header(content, charset)
                 .header("X-MBX-APIKEY","KWb3olcOQB07kFykqFXWjZMvzXMT7RFw9K28AADHAvt7DYqfxIQ1cY7nApAyYXq2")
                 .GET()
@@ -30,7 +32,7 @@ public class Get {
     }
 
     public static String getTickerCoinmarketCap() throws IOException, InterruptedException {
-        String coinmarketCap = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=PHA";
+        String coinmarketCap = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=" + symbol;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -54,7 +56,7 @@ public class Get {
         String apiKey = "2EkCEEqdkbe2XbSQDW";
         String recvWindow = "5000";
 
-        String Bybit = "https://api-testnet.bybit.com/spot/quote/v1/ticker/24hr?symbol=BTCUSDT";
+        String Bybit = "https://api-testnet.bybit.com/spot/quote/v1/ticker/24hr?symbol="+ symbol + "USDT";
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 @EnableScheduling
 public class Demo {
 
-
     public static void main(String[] args) throws IOException, InterruptedException {
         SpringApplication.run(Demo.class, args);
 

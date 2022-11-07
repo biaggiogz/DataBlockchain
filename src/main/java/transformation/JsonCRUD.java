@@ -19,20 +19,11 @@ import java.util.Date;
 
 public class JsonCRUD {
 
+    static String symbol = "LINK";
+
     public static JSONObject transformTickerBinance(String json) throws JsonProcessingException {
         Instant now =  Instant.now();
         JSONObject jo = new JSONObject(json);
-        jo.remove("weightedAvgPrice");
-        jo.remove("openPrice");
-        jo.remove("highPrice");
-        jo.remove("lowPrice");
-        jo.remove("lastPrice");
-        jo.remove("quoteVolume");
-        jo.remove("openTime");
-        jo.remove("closeTime");
-        jo.remove("firstId");
-        jo.remove("lastId");
-        jo.remove("count");
         jo.put("timestamp",Timestamp.from(now).getTime());
         jo.put("volumebinance",Float.valueOf(jo.get("volume").toString()));
         jo.remove("volume");
@@ -56,18 +47,15 @@ public class JsonCRUD {
 
     public static JSONObject transformTickerCoinmarketCap(String json) throws JsonProcessingException {
         JsonNode node = new ObjectMapper().readTree(json);
-        JsonNode node3 = node.get("data").get("PHA").findValue("USD");
-        JSONObject jo = new JSONObject(node3.toString());
+
+        JSONObject jo2 = new JSONObject(node.toString());
         Instant now =  Instant.now();
-
         Long e = Timestamp.from(now).getTime();
-        String symbol =  "PHA";
+        jo2.put("timestamp",e);
+        jo2.put("symbol",symbol);
+        jo2.put("time","1m");
 
-        jo.put("timestamp",e);
-        jo.put("symbol",symbol);
-        jo.put("time","1m");
-
-        return  jo;
+        return  jo2;
     }
 
     public static JSONObject transformTickerBybit(String json) throws JsonProcessingException {

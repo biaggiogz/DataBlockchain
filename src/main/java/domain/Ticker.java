@@ -27,4 +27,5 @@ public class Ticker {
         this.volume = volume;
     }
 
+
 }
