@@ -26,18 +26,7 @@ public class Democall {
                     e.printStackTrace();
                 }
     }
-    @Async
-    @Scheduled(cron = "0    *    *    *    *    *")
-    public void executeBybit() throws IOException, InterruptedException {
-        try {
-                    JSONObject    jo = JsonCRUD.transformTickerBybit(Get.getTickerBybit());
-                    JsonCRUD.writeJsonTickerBYbit(jo);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-    }
+
     @Async
     @Scheduled(cron = "0    *    *    *    *    *")
     public void executeBinance() throws IOException, InterruptedException {

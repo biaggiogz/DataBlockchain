@@ -22,8 +22,8 @@ public class Demo {
 
         Democall d = new Democall();
         d.executeBybit();
-        d.executeBinance();
-        d.executeCoinMarketCap();
+//        d.executeBinance();
+//        d.executeCoinMarketCap();
     }
 
 

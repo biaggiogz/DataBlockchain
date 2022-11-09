@@ -29,9 +29,6 @@ public class JsonCRUD {
         jo.remove("volume");
         jo.put("time","1m");
 
-
-//        ObjectMapper mapper = new ObjectMapper();
-//        Ticker ticker = mapper.readerFor(Ticker.class).readValue(jo.toString());
         return  jo;
     }
 
@@ -58,20 +55,6 @@ public class JsonCRUD {
         return  jo2;
     }
 
-    public static JSONObject transformTickerBybit(String json) throws JsonProcessingException {
-
-        JsonNode node = new ObjectMapper().readTree(json);
-        String jsonn =  node.get("result").toString();
-        JSONObject jo = new JSONObject(jsonn);
-        jo.put("volumeBybit",Float.valueOf(jo.get("volume").toString()));
-        jo.remove("volume");
-        Instant now =  Instant.now();
-        jo.put("timestamp",Timestamp.from(now).getTime());
-        jo.put("time","1m");
-
-
-        return  jo;
-    }
 
     public static void writeJsonTickerCoinmarketCap(JSONObject jo) throws IOException {
 
@@ -83,12 +66,5 @@ public class JsonCRUD {
         mapper.writeTree(jg, node3);
     }
 
-    public static void writeJsonTickerBYbit(JSONObject jo) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode node2 =mapper.readTree(jo.toString());
-        JsonFactory jf = new JsonFactory();
-        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/byBit/tickerbyBit" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
-        jg.useDefaultPrettyPrinter();
-        mapper.writeTree(jg, node2);
-    }
+
 }

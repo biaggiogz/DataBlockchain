@@ -48,27 +48,6 @@ public class Get {
 
 
 
-    public static String getTickerBybit() throws IOException, InterruptedException {
-
-        TimeZone.setDefault( TimeZone.getTimeZone("GMT"));
-        Instant now =  Instant.now();
-        String timestamp = String.valueOf(Timestamp.from(now).getTime());
-        String apiKey = "2EkCEEqdkbe2XbSQDW";
-        String recvWindow = "5000";
-
-        String Bybit = "https://api-testnet.bybit.com/spot/quote/v1/ticker/24hr?symbol="+ symbol + "USDT";
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(Bybit))
-                .header(content, charset)
-                .header("X-CMC_PRO_API_KEY","ccd927fc-c51d-4d5b-9245-5dafefb7021b")
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
-        return response.body();
-    }
 
 
 
