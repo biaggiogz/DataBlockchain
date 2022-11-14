@@ -21,7 +21,7 @@ public class Demo {
         SpringApplication.run(Demo.class, args);
 
         Democall d = new Democall();
-        d.executeBybit();
+            d.executeMEXC();
 //        d.executeBinance();
 //        d.executeCoinMarketCap();
     }

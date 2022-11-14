@@ -46,6 +46,24 @@ public class Get {
         return response.body();
     }
 
+    public static String getTickerMEXC() throws IOException, InterruptedException {
+
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+
+        String MEXC = "https://api.mexc.com/api/v3/ticker/24hr?symbol=" + symbol + "USDT";
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(MEXC))
+                .header(content, charset)
+//                .header("X-MEXC-APIKEY","ccd927fc-c51d-4d5b-9245-5dafefb7021b")
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
+
 
 
 

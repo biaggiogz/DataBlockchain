@@ -65,6 +65,25 @@ public class JsonCRUD {
         jg.useDefaultPrettyPrinter();
         mapper.writeTree(jg, node3);
     }
+    public static JSONObject transformTickerMEXC(String json) throws JsonProcessingException {
+        Instant now =  Instant.now();
+        JSONObject jo = new JSONObject(json);
+        jo.put("timestamp",Timestamp.from(now).getTime());
+        jo.put("volumeMEXC",Float.valueOf(jo.get("volume").toString()));
+        jo.remove("volume");
+        jo.put("time","1m");
 
+        return  jo;
+    }
+
+    public static void writeJsonTickerMEXC(JSONObject jo) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node2 =mapper.readTree(jo.toString());
+        JsonFactory jf = new JsonFactory();
+        JsonGenerator jg = jf.createGenerator(new File("src/main/resources/MEXC/tickerMEXC" + new  Date().getTime() +".js"), JsonEncoding.UTF8);
+        jg.useDefaultPrettyPrinter();
+        mapper.writeTree(jg, node2);
+    }
 
 }

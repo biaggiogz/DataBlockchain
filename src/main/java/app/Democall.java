@@ -39,4 +39,17 @@ public class Democall {
                     e.printStackTrace();
                 }
     }
+
+    @Async
+    @Scheduled(cron = "0    *    *    *    *    *")
+    public void executeMEXC() throws IOException, InterruptedException {
+        try {
+            JSONObject jo = JsonCRUD.transformTickerMEXC(Get.getTickerMEXC());
+            JsonCRUD.writeJsonTickerMEXC(jo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
