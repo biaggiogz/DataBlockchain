@@ -30,6 +30,7 @@ public class JsonCRUD {
                 .map(json -> new JSONObject(json))
                 .map(json -> json.put("timestamp",Timestamp.from(now).getTime()))
                 .map(json -> json.put("time","1m"))
+                .map(json -> json.put("IDB",SequenceID.sequenceID()))
                 .sequential()
                 .collectList()
                 .block();
@@ -91,6 +92,7 @@ public class JsonCRUD {
                 .map(string -> new JSONObject(string))
                 .map(json -> json.put("timestamp",Timestamp.from(now).getTime()))
                 .map(json -> json.put("time","1m"))
+                .map(json -> json.put("IDB",SequenceID.sequenceID()))
                 .sequential()
                 .collectList()
                 .block();
@@ -130,6 +132,7 @@ public class JsonCRUD {
             .map(json -> new JSONObject(json))
             .map(json -> json.put("timestamp",Timestamp.from(now).getTime()))
             .map(json -> json.put("time","1m"))
+            .map(json -> json.put("IDB",SequenceID.sequenceID()))
             .sequential()
             .collectList()
             .block();

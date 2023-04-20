@@ -3,6 +3,7 @@ package app;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import transformation.SequenceID;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Demo {
 
     public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
         SpringApplication.run(Demo.class, args);
-
+        SequenceID.sequenceID();
         parallel2();
 
     }
@@ -101,7 +102,7 @@ public class Demo {
               } catch (InterruptedException e) {
                   e.printStackTrace();
               }
-              return "Resultado del método 2";
+              return "Resultado del método 3";
           }, executor);
 
           CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1, future2, future3);
