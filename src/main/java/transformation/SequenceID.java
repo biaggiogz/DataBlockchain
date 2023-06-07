@@ -1,9 +1,12 @@
 package transformation;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.temporal.TemporalField;
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class SequenceID {
@@ -12,7 +15,7 @@ public class SequenceID {
 
 
 
-    public static String sequenceID(){
+    public static String sequenceid(){
 
         // Crea un objeto SimpleDateFormat con el formato deseado
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -29,6 +32,21 @@ public class SequenceID {
 
     }
 
+
+
+    public static Mono<String> generarId() {
+        return Mono.fromSupplier(() -> UUID.randomUUID().toString());
+    }
+
+    public static Mono<String> getid(){
+
+        String after = generarId().block();
+        String before = after.replace("-","").substring(0,8).concat(sequenceid());
+        Mono<String> mono = Mono.just(before);
+        return mono;
+
+
+    }
 
 
 

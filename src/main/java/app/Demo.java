@@ -6,8 +6,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import transformation.SequenceID;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 @SpringBootApplication
@@ -16,7 +14,7 @@ public class Demo {
 
     public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
         SpringApplication.run(Demo.class, args);
-        SequenceID.sequenceID();
+        SequenceID.sequenceid();
         parallel2();
 
     }
@@ -80,6 +78,7 @@ public class Demo {
               } catch (InterruptedException e) {
                   e.printStackTrace();
               }
+
               return "Resultado del método 1";
           }, executor);
 
@@ -91,6 +90,7 @@ public class Demo {
               } catch (InterruptedException e) {
                   e.printStackTrace();
               }
+
               return "Resultado del método 2";
           }, executor);
 
@@ -106,7 +106,7 @@ public class Demo {
           }, executor);
 
           CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1, future2, future3);
-
+//          CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1);
           try {
               combinedFuture.get(); // Esperar a que ambos métodos terminen
           } catch (Exception e) {
