@@ -105,7 +105,7 @@ public class Demo {
               return "Resultado del método 3";
           }, executor);
 
-          CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1, future2, future3);
+          CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1,future3, future2);
 //          CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1);
           try {
               combinedFuture.get(); // Esperar a que ambos métodos terminen
@@ -114,9 +114,10 @@ public class Demo {
           }
 
           // Aquí se pueden acceder a los resultados de los métodos llamando a future1.get() y future2.get()
-          System.out.println(future1.get());
-          System.out.println(future2.get());
-          System.out.println(future3.get());
+//          System.out.println(future1.get());
+//          System.out.println(future2.get());
+//          System.out.println(future3.get());
+          System.out.println("It´s working");
 
           Thread.sleep(60000); // Esperar 1 minuto antes de volver a llamar a los métodos
       }
