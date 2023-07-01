@@ -41,7 +41,7 @@ public class SequenceID {
     public static Mono<String> getid(){
 
         String after = generarId().block();
-        String before = after.replace("-","").substring(0,8).concat(sequenceid());
+        String before = after.replace("-","").substring(0,11).concat(sequenceid());
         Mono<String> mono = Mono.just(before);
         return mono;
 

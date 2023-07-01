@@ -21,11 +21,11 @@ public class Get {
 
 
     public static  List<String> getTickerBinance(){
-        String dot ="https://api.binance.com/api/v3/ticker?symbol=DOTUSDT&windowSize=1m";
-        String link = "https://api.binance.com/api/v3/ticker?symbol=LINKUSDT&windowSize=1m";
+//        String dot ="https://api.binance.com/api/v3/ticker?symbol=DOTUSDT&windowSize=1m";
+//        String link = "https://api.binance.com/api/v3/ticker?symbol=LINKUSDT&windowSize=1m";
         String eth = "https://api.binance.com/api/v3/ticker?symbol=ETHUSDT&windowSize=1m";
         String btc = "https://api.binance.com/api/v3/ticker?symbol=BTCUSDT&windowSize=1m";
-        List<String> parameters = Arrays.asList(dot, link, eth, btc);
+        List<String> parameters = Arrays.asList(eth, btc);
 
         Flux<String> parametersCoinFlux = Flux.fromIterable(parameters);
         List<String> outDataApi = parametersCoinFlux.flatMap(parameterCoin -> Mono.fromSupplier(() ->
@@ -59,11 +59,11 @@ public class Get {
     //----------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------
     public static  List<String> getTickerCoinmarketCap(){
-        String link ="https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=LINK";
-        String dot = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=DOT";
+//        String link ="https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=LINK";
+//        String dot = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=DOT";
         String eth = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=ETH";
         String btc = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC";
-        List<String> parameters = Arrays.asList(dot, link, eth, btc);
+        List<String> parameters = Arrays.asList( eth, btc);
 
         Flux<String> parametersCoinFlux = Flux.fromIterable(parameters);
 
@@ -110,12 +110,12 @@ public class Get {
     }
 
     public static  List<String> getTickerMEXC(){
-        String dot ="https://api.mexc.com/api/v3/ticker/24hr?symbol=DOTUSDT";
-        String link = "https://api.mexc.com/api/v3/ticker/24hr?symbol=LINKUSDT";
+//        String dot ="https://api.mexc.com/api/v3/ticker/24hr?symbol=DOTUSDT";
+//        String link = "https://api.mexc.com/api/v3/ticker/24hr?symbol=LINKUSDT";
         String eth = "https://api.mexc.com/api/v3/ticker/24hr?symbol=ETHUSDT";
         String btc = "https://api.mexc.com/api/v3/ticker/24hr?symbol=BTCUSDT";
 
-        List<String> parameters = Arrays.asList(dot, link, eth, btc);
+        List<String> parameters = Arrays.asList( eth, btc);
         Flux<String> parametersCoinFlux = Flux.fromIterable(parameters);
         List<String> outDataApi = parametersCoinFlux.flatMap(parameterCoin -> Mono.fromSupplier(() ->
                         {
